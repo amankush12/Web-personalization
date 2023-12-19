@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% block body %}
+
+
+ 
+<style>
+body {
+    background-image: url('static/unsplash_coffee_bar.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+}
+</style>
+
+ <div class="panel panel-default">
+<div class="panel-body">
+
+<br><br><br>
+<strong><h2>About</h2></strong>
+Parsley is a personalized restaurant recommendation engine that solves the age-old question – where should I go to eat? It addresses a gap in today’s recommendation engines landscape, using cosine similarities as a quick, simple way to understand a user's preferences and make tailored recommendations.
+
+Parsley searches more than 1.1 million US restaurants (with more than 40 restaurant-specific attributes for each) to surface relevant suggestions to users based on restaurants, bars and cafes that they already love – then surfaces relevant suggestions to users and allows users an easy way to access and visualize their favorite restaurants.
+
+Users provide feedback on suggestions as Parsley learns their preferences, using sci-kit learn's cosine similarity algorithm to find restaurants with feature vectors that closely match a user’s preferences for a requested zipcode and cuisine.
+<br><br>
+<strong><h2>Features</h2></strong>
+<ul>
+	<li> Secure user log in functionality (pbkdf2_sha256 encryption) </li>
+<li>Search and autocomplete functionality (Google Maps JS Autocomplete)</li>
+<li>Matching/recommendation algorithm (cosine similarity)</li>
+<li>Filter by zip code and cuisine </li>
+<li>Save and view user favorites (LeafletJS/Mapbox JS API)</li>
+<br><br><br>
+</ul>
+<!-- Questions? 
+<a href="mailto:careforsomeparsley@gmail.com?subject=Parsley">
+Contact us.
+</a><br><br><br><br> -->
+ 	<small>
+
+ 		<br><br><br><br>
+
+ 	Image credit:
+    Leaf by Evan MacDonald from <a href = "https://www.http://thenounproject.com/"> The Noun Project</a><br>
+    Background images from <a href = "https://unsplash.com/grid"> Unsplash </a><br>
+    <br>
+    
+	The MIT License (MIT)
+
+	Copyright (c) 2011-2014 Twitter, Inc
+
+	Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is	furnished to do so, subject to the following conditions:
+
+	The above copyright notice and this permission notice shall be included in
+	all copies or substantial portions of the Software.
+
+	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+	IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+	FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+	LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+	THE SOFTWARE.
+	<br><br><br>
+	
+Handcrafted in San Francisco in November 2014.
+</small>
+
+ 
+</div>
+</div>
+{%endblock%}

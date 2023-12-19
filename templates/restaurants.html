@@ -1,0 +1,216 @@
+<script src="~/Scripts/js/jquery.validate.js"></script> 
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> 
+
+    {% extends 'base.html' %}
+ 
+	 <link rel="stylesheet" type="text/css" href="/static/map_time.css">
+
+
+{% block body %}
+ 
+
+
+<style>
+body {
+    background-image: url('static/unsplash_resto.jpeg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+    height: 25%;
+}
+</style>
+
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&KEY=AIzaSyAXGlzHtApRcLiSO2qYeFuouCkAd4K4w08"></script> 
+    <script src ="static/autocomplete.js"></script>
+     <!--  MOVE THIS TO THE HEAD EVENTUALLY -->
+
+    
+    <div class="jumbotron">
+        <br><br>
+
+    <p class="help-block">
+        Looking for a new spot to try? Tell me three restaurants that you like. <br><br></p>
+            <form class="favorite-restaurants" method="POST">
+            <form role="form">
+              <div class="form-group">
+                <label for="restaurant_1"></label>
+                <input type="text" class="form-control" name ="restaurant_1" id="searchTextField" size="50">
+              </div>
+
+              <div class="form-group">
+                <label for="restaurant_2"></label>
+                <input type="text" class="form-control" name = "restaurant_2" id="searchTextField2">
+              </div>
+
+             <div class="form-group">
+                <label for="restaurant_3"></label>
+                <input type="text" class="form-control" name = "restaurant_3" id="searchTextField3" >
+              </div>
+
+                <br>
+                <div class="container">  
+                		<div class="row">
+                    		<div class="col-md-6">  
+            			    <p class="help-block">
+            			         Where would you like to search? <br> 
+            			     </p>
+            			         <input type = "user_geo" name = "user_geo" id ="user_geo" placeholder="Zip"> <br> <br><br>
+
+            			    </div>
+            			     
+            		    
+            		     <p class="help-block">     
+            		        Would you like to see only similar cuisines?
+            		        <br>
+            		    </p>
+                   
+                    		<div class="col-md-6">  
+            					
+            					<div class="btn-group" role="group" aria-label="...">
+            						<checkbox id="cuisines_similar" name ="cuisines_similar"  type="checkbox" class="btn btn-default" data-cuisine-id = "similar_cuisines" value="true"> Yes, show me cuisines similar to these restaurants
+            						
+            					</div><br> 
+                                <!-- 
+            					<div class="btn-group" role="group" aria-label="...">
+            						<checkbox id="categories_similar" name="categories_similar" type="checkbox" class="btn btn-default" data-category-id ="similar_categories"> Show me categories similar to these restaurants.
+                                    </div>
+            						 -->
+            				    </div>
+
+                     
+                    <script>
+                        
+                        // move checkbox to form 
+                        var text = document.getElementById("cuisines_similar");  
+                        text.addEventListener('click', function(e) {
+                            console.log(e);
+                            e.preventDefault();
+                            text.innerHTML = "Okay - we'll look for similar cuisines.";
+                          
+                        });
+
+                        // var cuisine_id = $(this).data("cuisine-id");  
+                        // console.log("[id^=similar_cuisines]")
+                        //   $.ajax({
+                        //     type: "POST",
+                        //     url: "/restaurants",
+                        //     data: { cuisine_id: cuisine_id }
+                        //   });
+
+                        // var text2 = document.getElementById("categories_similar"); 
+                        // text2.addEventListener('click', function(f) {
+                        //     console.log(f);
+                        //     f.preventDefault();
+                        //     text2.innerHTML = "Okay – we'll look for similar categories.";
+                        //     var category_id = $(this).data("category-id"); 
+                        //     console.log("[id^=similar_categories]")
+                        //       $.ajax({
+                        //         type: "POST",
+                        //         url: "/restaurants",
+                        //         data: { category_id: category_id,  cuisine_id: cuisine_id }
+                        //       })
+                        // });
+                    
+                        // $('#cuisines_similar').click(function (event) {
+                        // event.preventDefault();
+                        // var checkbox = $('#cuisines_similar'),
+                        //     isChecked = checkbox.is(':checked'),
+                        //     status = $('#status');
+                        // if(isChecked) {
+                        //     checkbox.prop('checked',false);
+                        //     status.html('unchecked');
+                        //     checkbox.innerHTML = "Cuisines similar to these restaurants.";
+                        // } else {
+                        //     checkbox.prop('checked', true); 
+                        //     status.html('checked');
+                        //     checkbox.innerHTML = "Okay - we'll look for similar cuisines.";
+                        // }
+                        //   });
+
+                        //  $('#categories_similar').click(function (event) {
+                        // event.preventDefault();
+                        // var checkbox2 = $('#categories_similar'),
+                        //     isChecked = checkbox2.is(':checked'),
+                        //     status = $('#status');
+                        // if(isChecked) {
+                        //     checkbox2.prop('checked',false);
+                        //     status.html('unchecked');
+
+                        //     checkbox2.innerHTML = "All categories.";
+                        // } else {
+                        //     checkbox2.prop('checked', true); 
+                        //     status.html('checked');
+                        //     checkbox2.innerHTML = "Got it – we'll look for similar places.";
+                        // }
+                        //   });
+
+
+                    </script>  
+                </div>
+
+            		<br>  
+                     <button class="btn btn-primary btn-lg" class="btn btn-default" align = "right" type="submit"> Tell me where to go 
+                     </button><br>
+            				<!-- </div> -->
+               </form>
+  </div>
+        
+        <!-- Uncaught ReferenceError: $ is not defined TODO: add to static folder-->
+          <script>
+          //   $(document).ready(function(){
+                
+
+          //       $("#similar_cuisines").click(function(){
+          //       // $("[id^=similar_cuisines]").click(function(){
+          //         var cuisine_id = $(this).data("cuisine-id");  
+          //         console.log("[id^=similar_cuisines]")
+          //         $.ajax({
+          //           type: "POST",
+          //           url: "/restaurants",
+          //           data: { cuisine_id: cuisine_id }
+          //         })
+                
+          //           });
+          // });
+
+
+           // $(document).ready(function(){
+
+           //  $("[id^=similar_categories]").click(function(){
+                
+           //    var category_id = $(this).data("category-id"); 
+           //    console.log("[id^=similar_categories]")
+           //    $.ajax({
+           //      type: "POST",
+           //      url: "/restaurants",
+           //      data: { category_id: category_id }
+           //    })
+           //    .done(function( msg){
+           //      $('#' + msg['feedback_button_id']).attr('src',"static/clicked-sad.png");
+           //    });
+            
+           //      });
+ 
+
+          
+          //   $(document).ready(function(){
+
+          //   $("[id^=cuisines_]").click(function(){
+          //     var cuisine_id = $(this).data("cuisine-id"); 
+          //     console.log("[id^=cuisines_]")
+          //     $.ajax({
+          //       type: "POST",
+          //       url: "/restaurants",
+          //       data: { cuisine_id: cuisine_id}
+          //     })
+            
+          //       });
+          // });;
+
+
+  </script>
+
+
+
+{%endblock%}

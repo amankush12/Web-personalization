@@ -1,0 +1,25 @@
+body {
+	background-image: url('/static/unsplash_city.jpg');
+	background-size:100%;
+	margin:0;
+}
+
+h1 {
+	font-family: 'Roboto', sans-serif;
+	font-size: 40pt;
+	margin-left: 10px;
+	display: inline-block;
+}
+
+font-family-base
+{
+	font-family: 'Roboto', sans-serif;
+	font-size: 40pt;
+	margin-left: 10px;
+	display: inline-block;
+
+}
+
+/*
+
+.jumbotron { max-height: 300px; }*/

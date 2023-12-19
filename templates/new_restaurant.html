@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% extends 'base.html' %}
+
+<link rel="stylesheet" href="magnific-popup/magnific-popup.css"> 
+  
+    
+{% block body %}
+<!-- jQuery 1.7.2+ or Zepto.js 1.0+ -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> 
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> 
+
+
+ 
+<div class="panel panel-default">
+<div class="panel-body">
+
+      <!-- 
+      <h3><p class="help-block">We noticed that you like places that {{translated_sorted_rest_feat_sim_keys[0]}},
+      {{translated_sorted_rest_feat_sim_keys [1]}} and
+      {{translated_sorted_rest_feat_sim_keys [2]}}.<br> -->
+
+      <br> 
+      Based on the restaurants you submitted, here's some restaurants we think you'll like.</p></h3>
+      <br><br>
+     
+      {% set entry_counter = 0 %}
+      {%for entry in new_restaurant_suggestion%} 
+            <div id = "{{entry_counter}}" class ="row-fluid" >
+            <div class="span6">
+              <a href = "{{entry.website}}" >{{entry['name']}} </a><br>
+              {{entry.address}} <br>
+              {{entry.tel}}<br>
+         
+              <br>How does this sound? <br>
+             
+                <br>
+              <input type="image" name="identify" id="happy_face_{{ entry_counter }}" value="ID" img src="/static/likeit.png" alt="Hate it" style="width:40xpx;height:40px" data-restaurant-rating-id = "{{1}}" data-restaurant-id = "{{entry['factual_id']}}"/>
+             
+              <input type="image" name="identify" id="sad_face_{{ entry_counter }}"value="ID" img src="/static/sad.png" alt="Love it"  data-restaurant-rating-id = "{{0}}" data-restaurant-id = "{{entry['factual_id']}}" style="width:40xpx;height:40px"  />
+              </a>
+              <br><br><br>
+           
+      {% set entry_counter = entry_counter + 1 %}
+            
+      {%endfor%}
+    </div> 
+<script>
+
+$(document).ready(function(){
+
+   
+
+    $("[id^=happy_face_]").click(function(){
+    var factual_id = $(this).data("restaurant-id");
+    var user_feedback = $(this).attr("data-restaurant-rating-id");
+    var button_id = $(this).attr("id");
+
+    if (!$(this).hasClass('happy')) {
+        $(this).attr('src', 'static/clicked-happy.png');
+        $(this).addClass('happy')
+        $.ajax({
+          type: "POST",
+          url: "/user_feedback",
+            data: { factual_id: factual_id, user_feedback: user_feedback, button_id: button_id}
+          })
+    } else  {
+        $(this).attr('src', 'static/happy.png');
+        $(this).removeClass('happy')
+        $.ajax({
+          type: "POST",
+          url: "/user_feedback",
+            data: { factual_id: factual_id, user_feedback: user_feedback, button_id: button_id}
+          })
+      
+    }
+});
+
+
+    
+        });
+ 
+
+$(document).ready(function(){
+
+  $("[id^=sad_face_]").click(function(){
+    var factual_id = $(this).data("restaurant-id");
+    var user_feedback = $(this).attr("data-restaurant-rating-id");
+    var button_id = $(this).attr("id");
+
+    $.ajax({
+      type: "POST",
+      url: "/user_feedback",
+      data: { factual_id: factual_id, user_feedback: user_feedback, button_id: button_id}
+    })
+      .done(function( msg){
+        $('#' + msg['feedback_button_id']).attr('src',"static/clicked-sad.png");
+      });
+});;
+      });
+
+
+
+        
+</script>
+<!-- 
+<form action="/refresh_restaurants" method="get">
+  <button type="btn btn-lg btn-primary btn-block" input type="submit"  name="Submit" id="frm1_submit" >
+       Show me some new restaurants</button><br>
+</form> -->
+
+        <form>
+        <button type="btn btn-lg btn-primary btn-block" align = "center" type="get"> 
+          Show me some new restaurants
+        </form>
+</div>
+</div>
+      <br>
+    
+{%endblock%}
+
+</html>
